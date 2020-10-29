@@ -55,13 +55,25 @@ public class CourseService implements ICourseService {
         iStudentService.saveStudent(student);
     }
 
-    public void updateClass(Course course){
-        Course courseUpdate = getCourseById(course.getId());
-        if(courseUpdate == null){
-            System.out.println("Course invalid");
+    public void updateClass(Integer id_Course, Integer id_Student){
+        Course course = getCourseById(id_Course);
+        Student student = iStudentService.getStudentById(id_Student);
+        // Neu khong tim thay course hoac student
+        if(course == null || student == null ){
+            System.out.println("Student hoac Course khong tim thay");
         }
-        courseUpdate.setStudentSet(course.getStudentSet());
-        courseRepository.save(courseUpdate);
+        // Lay danh sach cua course va student
+        Set<Student> studentSet = course.getStudentSet();
+        Set<Course> courseSet = student.getCourseSet();
+        // xoa student va course trong set
+        studentSet.remove(student);
+        courseSet.remove(course);
+        // cap nhat lai
+
+        course.setStudentSet(studentSet);
+        student.setCourseSet(courseSet);
+        courseRepository.save(course);
+        iStudentService.saveStudent(student);
     }
 
 }

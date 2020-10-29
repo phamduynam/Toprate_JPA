@@ -39,4 +39,11 @@ public class CourseController {
         courseService.registryClass(courseId,studentId);
         return "OK";
     }
+
+    @PostMapping(path = "/update/classroom/{courseId}/{studentId}")
+    public String updateClassRoom(@PathVariable(name = "courseId") Integer courseId, @PathVariable(name = "studentId") Integer studentId ){
+
+        courseService.updateClass(courseId,studentId);
+        return "OK";
+    }
 }

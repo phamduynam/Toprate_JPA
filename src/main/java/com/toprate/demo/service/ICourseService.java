@@ -16,4 +16,5 @@ public interface ICourseService {
 
     void registryClass(Integer id_Course, Integer id_Student);
 
+    void updateClass(Integer id_Course, Integer id_Student);
 }
